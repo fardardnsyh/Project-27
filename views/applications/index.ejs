@@ -1,0 +1,68 @@
+<%- include("../partials/head.ejs") %>
+
+  <body>
+    <main class="dashboard-container">
+      <%- include("../partials/sidebar.ejs") %>
+      <div class="user-content-container">
+        <h1 class="application-home-heading">My Applications</h1>
+        <div class="application-list-container">
+          <table class="application-table">
+            <thead>
+              <tr>
+                <th class="table-heading">Company</th>
+                <th class="table-heading">Position</th>
+                <th class="table-heading">Status</th>
+                <th class="table-heading-view"></th>
+                <th class="table-heading-delete"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% if (applications) { %>
+                <% applications.forEach(application=> { %>
+                  <tr class="application-entry">
+                    <td>
+                      <%= application.companyName %>
+                    </td>
+                    <td>
+                      <%= application.positionTitle %>
+                    </td>
+                    <% if (application.status==="Applied" ) { %>
+                        <td class="status">
+                          <div class="status-applied"><%= application.status %></div>
+                        </td>
+                    <% } else if (application.status==="Interviewing" ) { %>
+                        <td class="status">
+                          <div class="status-interviewing"><%= application.status %></div>
+                        </td>
+                    <% } else if (application.status==="Interested" ) { %>
+                          <td class="status">
+                            <div class="status-interested"><%= application.status %></div>
+                          </td>
+                    <% } else { %>
+                          <td class="status">
+                            <div class="application-status">None</div>
+                          </td>
+                    <% } %>
+                      <td class="view-link"><a href="/application/<%=application._id%>"><button><i
+                              class="fa-regular fa-eye"></i></button></a></td>
+                      <td>
+                        <form action="/application/<%=application._id%>?_method=DELETE" method="POST"><button><i
+                              class="fa-solid fa-trash"></i></button></form>
+                      </td>
+                  </tr>
+                  <% }) %>
+                <% } %>
+            </tbody>
+          </table>
+        </div>
+        <a class="add-btn" href="/application/new">
+          <button>
+            <span class="fa-solid fa-plus"></span> New
+            Application
+          </button>
+        </a>
+      </div>
+    </main>
+  </body>
+
+  </html>

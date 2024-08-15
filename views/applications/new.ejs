@@ -1,0 +1,37 @@
+<%- include("../partials/head.ejs") %>
+<body>
+  <main class="dashboard-container">
+    <%- include("../partials/sidebar.ejs") %>
+    <div class="user-content-container">
+      <form class="new-application-form" action="/application/new" method="POST">
+        <label for="companyName">Company</label>
+        <input id="companyName" name="companyName" type="text" placeholder="e.g Google" required>
+
+        <label for="positionTitle">Position</label>
+        <input id="positionTitle" name="positionTitle" type="text" placeholder="e.g Software Engineer" required>
+
+        <label for="status">Application Status</label>
+        <select class="status-selections" id="status" name="status">
+          <option value="">Set a status</option>
+          <option value="Applied" class="applied">Applied</option>
+          <option value="Interested" class="Interested">Interested</option>
+          <option value="Interviewing" class="Interviewing">Interviewing</option>
+        </select>
+
+        <label for="jobRequirements">Any Job Requirements</label>
+        <textarea id="jobRequirements" name="jobRequirements" rows="10"  placeholder="e.g Requires experience in the following: Microservices; Apache Kafka; Docker; J2EE; Spring; REST; SOAP; Maven; JSON; and GIT."></textarea>
+
+        <label for="notes">Notes</label>
+        <textarea id="notes" name="notes" cols="40" rows="10" placeholder="e.g A buddy recommended this opportunity to me. TODO: need to follow up"></textarea>
+
+        <% const date = new Date() %>
+        <textarea id="datePosted" name="datePosted" rows="1" readonly><%= date.toLocaleDateString() %></textarea>
+
+        <textarea class="hidden" id="createdBy" name="createdBy" rows="1" readonly><%= user.email %></textarea>
+
+        <button><span class="fa-solid fa-plus"></span> Add</button>
+      </form>
+    </div>
+  </main>
+</body>
+</html>

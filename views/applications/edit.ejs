@@ -1,0 +1,32 @@
+<%- include("../partials/head.ejs") %>
+<body>
+  <main class="dashboard-container">
+  <%- include("../partials/sidebar.ejs") %>
+  <div class="user-content-container">
+  <form class="application-form" action="/application/<%=application._id%>/edit?_method=PUT" method="POST">
+    <div class="form-card">
+    <label for="companyName">Company</label>
+    <input id="companyName" name="companyName" type="text" placeholder="e.g Google" value="<%= application.companyName %>" required>
+    <label for="positionTitle">Position</label>
+    <input id="positionTitle" name="positionTitle" type="text" placeholder="e.g Software Engineer" value="<%= application.positionTitle %>" required>
+    <label for="status">Application Status</label>
+    <select class="status-selections" id="status" name="status">
+      <option value="">Choose a status</option>
+      <option value="Applied" class="applied">Applied</option>
+      <option value="Interested" class="Interested">Interested</option>
+      <option value="Interviewing" class="Interviewing">Interviewing</option>
+    </select>
+  </div>
+    <div class="form-card">
+    <label for="jobRequirements">Job Requirements</label>
+    <textarea id="jobRequirements" name="jobRequirements" cols="40" rows="10"  placeholder="e.g Requires experience in the following: Microservices; Apache Kafka; Docker; J2EE; Spring; REST; SOAP; Maven; JSON; and GIT."><%= application.jobRequirements %></textarea>
+    <label for="notes">Notes</label>
+    <textarea id="notes" name="notes" cols="40" rows="10" placeholder="e.g A buddy recommended this opportunity to me. TODO: need to follow up"><%= application.notes %></textarea>
+    <input type="submit" value="Edit Application">
+  </div>
+  </form>
+  <a href="/application/<%=application._id%>" class="back-btn"><button><i class="fa-solid fa-chevron-left"></i> <span class="back-txt">Back to <%=application.companyName%> Application</span></button></a>
+</div>
+</main>
+</body>
+</html>

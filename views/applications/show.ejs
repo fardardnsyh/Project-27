@@ -1,0 +1,54 @@
+<%- include("../partials/head.ejs") %>
+<body>
+  <main class="dashboard-container">
+    <%- include("../partials/sidebar.ejs") %>
+    <div class="user-content-container mobile">
+      <h1 class="company-name"><%= application.companyName %></h1>
+      <a class="update-btn" href="/application/<%=application._id%>/edit"><i class="fa-solid fa-pen-to-square"></i> <span class="update-txt">Update</span></a>
+      <h2 class="position-title"><%= application.positionTitle %></h2>
+      <h3 class="status">Application Status</h3>
+      <div class="card">
+        <% if (application.status==="Applied" ) { %>
+          <td class="status">
+            <div class="status-applied"><%= application.status %></div>
+          </td>
+        <% } else if (application.status==="Interviewing" ) { %>
+          <td class="status">
+            <div class="status-interviewing"><%= application.status %></div>
+          </td>
+        <% } else if (application.status==="Interested" ) { %>
+          <td class="status">
+            <div class="status-interested"><%= application.status %></div>
+          </td>
+        <% } else { %>
+          <td class="status">
+            <div class="application-status">None</div>
+          </td>
+        <% } %>
+      </div>
+      <h3>Job Requirements</h3>
+      <div class="card">
+        <% if (application.jobRequirements) { %>
+          <p><%= application.jobRequirements %></p>
+        <% } else { %>
+          None
+        <% } %>
+      </div>
+      <h3>Notes</h3>
+      <div class="card">
+        <% if (application.notes) { %>
+          <p><%= application.notes %></p>
+        <% } else { %>
+          None
+        <% } %>
+      </div>
+      <a href="/application" class="back-btn">
+        <button>
+          <span class="fa-solid fa-chevron-left"></span> 
+          <span class="back-txt">Back to My Application</span>
+        </button>
+      </a>
+    </div>
+  </main>
+</body>
+</html>

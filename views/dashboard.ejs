@@ -1,0 +1,65 @@
+<%- include("./partials/head.ejs") %>
+<body>
+  <main class="dashboard-container">
+    <%- include("./partials/sidebar.ejs") %>
+    <div class="user-content-container">
+      <h1 class="dashboard-greeting">Welcome back, <%= user.firstName %></h1>
+      <div class="main-dashboard">
+        <div class="goals-container">
+          <% const dailyTarget = 30 %>
+          <!-- count amount of applications posted within a date -->
+          <% let postCounter = 0 %>
+          <% let postDate = null %>
+          <!-- stores current date into a variable to compare to the post date then formats the date -->
+          <% const date = new Date() %>
+          <% const formatDate = date.toLocaleDateString() %>
+
+          <% applications.forEach(application => { %>
+            <% if (application.datePosted) { %>
+              <% postDate = application.datePosted %>
+              <!-- format application post date -->
+              <% postDate = postDate.toLocaleDateString() %>
+              <% if (formatDate === postDate && application.status === "Applied") { %>
+                <% postCounter++ %>
+              <% } %>
+            <% } %>
+          <% }) %>
+
+          <% if (postCounter === dailyTarget) { %>
+            <h2 class="goal-tracker">
+              Daily Goal: <span class="animate-counter"><%= postCounter %></span> out of <span class="target"><%= dailyTarget %></span>
+            </h2>
+          <% } else { %>
+            <h2 class="goal-tracker">
+              Daily Goal: <span class="progress-counter"><%= postCounter %></span> out of <span class="target"><%= dailyTarget %></span>
+            </h2>
+          <% } %>
+
+          <h3>Recent Companies You've Applied To</h3>
+          <% for (let i = applications.length - 1; i >= 0; i--) { %>
+            <% if (i > applications.length - 5) { %>
+              <% if (applications[i].status === "Applied") { %>
+                <div class="jobs-applied-for">
+                  <%=applications[i].companyName%>
+                  <span>
+                    <a href="/application/<%=applications[i]._id%>">
+                      <button><span class="fa-regular fa-eye"></span></button>
+                    </a>
+                  </span>
+                </div>
+              <% } %>
+            <% } %>
+          <% } %>
+        </div>
+
+        <!-- <div class="quote-container">
+            <h3>Motivational Quotes</h3>
+            <p class="quote">
+            </p>
+        </div> -->
+      </div>
+    </div>
+  </main>
+</body>
+
+</html>

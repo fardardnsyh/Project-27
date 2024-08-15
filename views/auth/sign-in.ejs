@@ -1,0 +1,17 @@
+<%- include("../../views/partials/head.ejs") %>
+
+<body>
+  <%- include("../../views/partials/navbar.ejs") %>
+  <div class="sign-in-form">
+    <div class="box"></div>
+    <h1 class="logo">jATS</h1>
+    <form action="/auth/sign-in" method="POST">
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" placeholder="Enter email" required>
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" placeholder="Enter password" required>
+      <input type="submit" value="Sign in">
+    </form>
+  </div>
+</body>
+</html>
